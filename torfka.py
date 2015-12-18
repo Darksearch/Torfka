@@ -42,7 +42,8 @@ class Torfka:
 
 def main():
 	torf = Torfka(120)
-	msg = torf.onion_feed()
+	# Hidden Wiki 
+	msg = torf.onion_feed('http://zqktlwi4fecvo6ri.onion/wiki/index.php/Main_Page')
 	torf.produce('Dark-web', msg)
 	print msg
 main()
