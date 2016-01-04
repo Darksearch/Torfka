@@ -8,9 +8,9 @@ import threading
 
 class Torfka:
 
-	def __init__(self, n =120, torSocket = 9150):	
+	def __init__(self, n =120, torSocket = 9050):	
 		# Loop printing to the Kafka producer every n seconds
-		threading.Timer(n, main).start()
+		#threading.Timer(n, main).start()
 		self.start()
 
 	def create_connection(self, address, timeout=None, source_address=None):
@@ -20,7 +20,7 @@ class Torfka:
 
 	def start(self):
 		# Socket is 9150, 9050 was the old one. Troubleshoot this using netstat
-		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9150)
+		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050)
 		socket.socket = socks.socksocket
 		# We need to monkey patch the create connection function
 		socket.create_connection = self.create_connection
@@ -41,7 +41,7 @@ class Torfka:
 		return onionfeed
 
 def main():
-	torf = Torfka(120)
+	torf = Torfka()
 	# Hidden Wiki 
 	msg = torf.onion_feed('http://zqktlwi4fecvo6ri.onion/wiki/index.php/Main_Page')
 	torf.produce('Dark-web', msg)
