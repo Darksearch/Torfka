@@ -5,7 +5,8 @@ from kafka import SimpleProducer, KafkaClient
 import threading
 
 # Make sure that Zookeeper, Kafka, and Tor are all running. 
-class Torfka:
+class Torfka(object):
+
 
 	def __init__(self, torSocket, hostIP):
 		self.torSocket = torSocket
@@ -32,7 +33,6 @@ class Torfka:
 		kafka = KafkaClient('%s:9092' % self.hostIP)
 		producer = SimpleProducer(kafka)
 		producer.send_messages(topic, message)
-
 
 	def onion_feed(self, site):
 		onionfeed = urllib2.urlopen(site).read()
