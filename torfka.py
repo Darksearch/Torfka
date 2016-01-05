@@ -5,12 +5,11 @@ from kafka import SimpleProducer, KafkaClient
 import threading
 
 # Make sure that Zookeeper, Kafka, and Tor are all running. 
-
 class Torfka:
 
-	def __init__(self, n =120, torSocket = 9050):	
-		# Loop printing to the Kafka producer every n seconds
-		#threading.Timer(n, main).start()
+	def __init__(self, torSocket, hostIP):
+		self.torSocket = torSocket
+		self.hostIP = hostIP	
 		self.start()
 
 	def create_connection(self, address, timeout=None, source_address=None):
@@ -19,8 +18,7 @@ class Torfka:
 	    return sock
 
 	def start(self):
-		# Socket is 9150, 9050 was the old one. Troubleshoot this using netstat
-		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050)
+		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", self.torSocket)
 		socket.socket = socks.socksocket
 		# We need to monkey patch the create connection function
 		socket.create_connection = self.create_connection
@@ -31,19 +29,29 @@ class Torfka:
 	def produce(self, topic, message):
 		# Tor messes with the kafka stream, so lets reset some changes we've made. 
 		self.reset()
-		kafka = KafkaClient('localhost:9092')
+		kafka = KafkaClient('%s:9092' % self.hostIP)
 		producer = SimpleProducer(kafka)
 		producer.send_messages(topic, message)
+
 
 	def onion_feed(self, site):
 		onionfeed = urllib2.urlopen(site).read()
 		# Scrape here. 
 		return onionfeed
 
-def main():
-	torf = Torfka()
+if __name__ == '__main__':
+	'''
+	- First parameter is the Socket, use 9150 for Tor Browser, 9050 for Tor Service
+	- Second is the kafka broker, use 'localhost' if you're using this outside of Docker,
+	otherwise use the appopiate hostname/IP.
+
+	The Following example uses Tor in your container to push darkweb messages to a local broker. 
+	'''
+	torf = Torfka(9050, '10.1.3.64')
 	# Hidden Wiki 
 	msg = torf.onion_feed('http://zqktlwi4fecvo6ri.onion/wiki/index.php/Main_Page')
 	torf.produce('Dark-web', msg)
 	print msg
-main()
+	# Uncomment to loop printing to the Kafka producer every n seconds
+	# threading.Timer(n, main).start()
+	
