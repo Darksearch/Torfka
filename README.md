@@ -1,7 +1,7 @@
 # Torfka
-Torfka allows you to scrape the Dark Web using Tor, then publish to a local Kafka thread. 
+Torfka allows you to scrape the Dark Web using Tor, then publish to a Kafka thread. 
 
-##Requirements
+##Dependencies
 - Apache Zookeeper
 - Apache Kafka
 - Tor
@@ -19,7 +19,7 @@ You can run Torfka with the provided Dockerfile, or stand-alone.
   $ bin/kafka-server-start.sh config/server.properties
   $ sudo service tor start
   ```
-2. Next you'll need to make sure torfka object has the correct paramenters in torfka.py, 
+2. Next, make sure your torfka object has the correct paramenters in torfka.py, 
 
   ```
   Torfka(9050, <IP OF PRODUCER>)
@@ -32,7 +32,7 @@ You can run Torfka with the provided Dockerfile, or stand-alone.
   $ bin/kafka-console-consumer.sh --zookeeper  <IP OF PRODUCER>:2181 --topic Dark-web --from-beginning
   ```
 
-####Without Docker using Tor Browser
+####Without Docker using TorBrowser
 Same steps, except:
 
 1. You do not need to run 'sudo service tor start', instead, open your TorBrowser.
