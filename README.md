@@ -9,7 +9,7 @@ Torfka allows you to scrape the Dark Web using Tor, then publish to a local Kafk
 - Socksipy
 
 ##Running Torfka
-You can run Torka with Docker, using the Tor service. Or stand-alone, using the TorBrowser App
+You can run Torfka with the provided Dockerfile, or stand-alone. 
 
 ####With Docker
 1. After you build and run the Docker container, start the required services in /home
@@ -31,12 +31,13 @@ You can run Torka with Docker, using the Tor service. Or stand-alone, using the 
   # Consume new messages
   $ bin/kafka-console-consumer.sh --zookeeper  <IP OF PRODUCER>:2181 --topic Dark-web --from-beginning
   ```
+
 ####Without Docker using Tor Browser
 Same steps, except:
 
-- You do not need to run 'sudo service tor start', instead, open your TorBrowser.
+1. You do not need to run 'sudo service tor start', instead, open your TorBrowser.
  
-- In torfka.py, you need to change the socket to 9150 instead of 9050:
+2. In torfka.py, you need to change the socket to 9150 instead of 9050:
   ```
   Torfka(9150, <IP OF PRODUCER>)
   ```
