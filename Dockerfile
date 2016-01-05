@@ -18,6 +18,6 @@ RUN \
 WORKDIR /home
 RUN \
   wget "http://apache.arvixe.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz" -O kafka.tgz && \
-  tar -xvzf kafka.tgz --strip 1 
-WORKDIR /home
-RUN git clone https://github.com/vlall/torfka 
+  tar -xvzf kafka.tgz --strip 1 && \
+  rm kafka.tgz && \
+  git clone https://github.com/vlall/torfka
