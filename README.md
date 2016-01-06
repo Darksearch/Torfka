@@ -40,3 +40,12 @@ Same steps, except:
   ```
   Torfka(9150, <IP OF PRODUCER>)
   ```
+  
+####Troubleshooting Errors
+
+- Insufficient Kafka memory Error- specify heap size
+
+  ```
+  $ export KAFKA_HEAP_OPTS="-Xmx1G -Xms1G"
+  $ export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"  
+  ```
