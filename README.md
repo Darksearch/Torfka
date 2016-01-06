@@ -28,7 +28,6 @@ You can run Torfka with the provided Dockerfile, or stand-alone.
 3. Finally, run the script and follow your topic
   ```
   $ python Torfka/torfka.py
-  # Consume new messages
   $ bin/kafka-console-consumer.sh --zookeeper  <IP OF PRODUCER>:2181 --topic Dark-web --from-beginning
   ```
 
