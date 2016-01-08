@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
 	The Following example uses Tor in your container to push darkweb messages to a local broker. 
 	'''
-	torf = Torfka(9050, '10.1.3.64')
+	torf = Torfka(9050, 'localhost')
 	# Hidden Wiki 
 	msg = torf.onion_feed('http://zqktlwi4fecvo6ri.onion/wiki/index.php/Main_Page')
 	torf.produce('Dark-web', msg)
