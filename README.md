@@ -1,5 +1,11 @@
 # Torfka
-Torfka allows you to scrape the Dark Web using Tor, then publish to a Kafka thread. 
+Torfka allows you to scrape the Dark Web using Tor, then publish to a Kafka thread.
+
+*Requires Python >=2.7.10:*
+#####TO DO
+
+- Test on python 2.7.6-.9
+- Update Python version of Docker container. 
 
 ##Dependencies
 - Apache Zookeeper
