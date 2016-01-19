@@ -1,6 +1,5 @@
 # Torfka
-Torfka allows you to scrape the Dark Web using Tor, then publish to a Kafka thread.
-
+Torfka allows you to scrape the Dark Web using Tor, then publish to a Kafka thread. This is the back-end for http://darksearch.io
 *Requires Python >=2.7.10:*
 #####TO DO
 
