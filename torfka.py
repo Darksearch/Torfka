@@ -59,5 +59,3 @@ if __name__ == '__main__':
     )
     torf.produce('Dark-web', msg)
     print msg
-    #  Uncomment to loop printing to the Kafka producer every n seconds
-    #  threading.Timer(n, main).start()
